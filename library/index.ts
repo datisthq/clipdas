@@ -1,1 +1,1 @@
-export const termway = "termway"
+export const clipdas = "clipdas"

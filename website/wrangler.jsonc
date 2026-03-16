@@ -1,5 +1,5 @@
 {
-  "name": "termway",
+  "name": "clipdas",
   "$schema": "node_modules/wrangler/config-schema.json",
   "compatibility_date": "2025-08-15",
   "assets": {
@@ -7,7 +7,7 @@
   },
   "routes": [
     {
-      "pattern": "termway.dev",
+      "pattern": "clipdas.dev",
       "custom_domain": true,
     },
   ],
