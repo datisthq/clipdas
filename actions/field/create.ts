@@ -14,8 +14,7 @@ export function createFieldBuilder(meta: FieldMeta) {
     boolean: () => writeFieldMeta(z.boolean(), meta),
     enum: <const T extends readonly [string, ...string[]]>(values: T) =>
       writeFieldMeta(z.enum(values), meta),
-    array: <T extends z.ZodType>(inner: T) =>
-      writeFieldMeta(z.array(inner), meta),
+    array: <T extends z.ZodType>(inner: T) => writeFieldMeta(z.array(inner), meta),
     schema: <T extends z.ZodType>(schema: T) => writeFieldMeta(schema, meta),
   }
 }

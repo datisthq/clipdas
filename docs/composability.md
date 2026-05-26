@@ -23,9 +23,7 @@ import { f } from "fireargs"
 import { z } from "zod"
 
 const paginationParams = z.object({
-  page: f
-    .option({ short: "p" })
-    .schema(z.coerce.number().int().min(1).default(1)),
+  page: f.option({ short: "p" }).schema(z.coerce.number().int().min(1).default(1)),
   limit: f
     .option({ short: "l" })
     .schema(z.coerce.number().int().min(1).max(100).default(20)),

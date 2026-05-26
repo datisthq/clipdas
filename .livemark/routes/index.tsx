@@ -47,8 +47,8 @@ function Hero() {
         </h1>
 
         <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-          Define each command with input and output schemas. Get composability,
-          JSON I/O, and LLM-ready manifests baked in.
+          Define each command with input and output schemas. Get composability, JSON I/O,
+          and LLM-ready manifests baked in.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -79,8 +79,7 @@ function Hero() {
         <div className="mt-10 hidden sm:inline-flex items-center gap-3 rounded-lg border border-border bg-card/50 backdrop-blur px-4 py-2.5 font-mono text-sm text-muted-foreground">
           <span className="text-primary select-none">$</span>
           <span>
-            <span className="text-foreground">npm install</span> fireargs zod
-            commander
+            <span className="text-foreground">npm install</span> fireargs zod commander
           </span>
         </div>
       </div>
@@ -185,9 +184,7 @@ function FeatureCard({ icon: Icon, title, description }: Feature) {
         <Icon className="size-5" />
       </div>
       <h3 className="text-lg font-semibold text-foreground">{title}</h3>
-      <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-        {description}
-      </p>
+      <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{description}</p>
     </div>
   )
 }
@@ -211,24 +208,20 @@ function SourceSample() {
     <pre className="p-5 text-sm leading-relaxed font-mono overflow-x-auto">
       <code className={tk.body}>
         <span className={tk.keyword}>import</span>{" "}
-        <span className={tk.punct}>{"{ "}</span>f
-        <span className={tk.punct}>{" }"}</span>{" "}
+        <span className={tk.punct}>{"{ "}</span>f<span className={tk.punct}>{" }"}</span>{" "}
         <span className={tk.keyword}>from</span>{" "}
         <span className={tk.string}>"fireargs"</span>
         {"\n"}
         <span className={tk.keyword}>import</span>{" "}
-        <span className={tk.punct}>{"{ "}</span>z
-        <span className={tk.punct}>{" }"}</span>{" "}
-        <span className={tk.keyword}>from</span>{" "}
-        <span className={tk.string}>"zod"</span>
+        <span className={tk.punct}>{"{ "}</span>z<span className={tk.punct}>{" }"}</span>{" "}
+        <span className={tk.keyword}>from</span> <span className={tk.string}>"zod"</span>
         {"\n\n"}
         <span className={tk.keyword}>const</span> greet{" "}
         <span className={tk.punct}>=</span> f{"\n  "}
         <span className={tk.punct}>.</span>
         <span className={tk.func}>command</span>
         <span className={tk.punct}>{"({ "}</span>name
-        <span className={tk.punct}>:</span>{" "}
-        <span className={tk.string}>"greet"</span>
+        <span className={tk.punct}>:</span> <span className={tk.string}>"greet"</span>
         <span className={tk.punct}>{" })"}</span>
         {"\n  "}
         <span className={tk.punct}>.</span>
@@ -237,15 +230,13 @@ function SourceSample() {
         <span className={tk.func}>object</span>
         <span className={tk.punct}>{"({"}</span>
         {"\n    "}
-        name<span className={tk.punct}>:</span> f
-        <span className={tk.punct}>.</span>
+        name<span className={tk.punct}>:</span> f<span className={tk.punct}>.</span>
         <span className={tk.func}>argument</span>
         <span className={tk.punct}>().</span>
         <span className={tk.func}>string</span>
         <span className={tk.punct}>(),</span>
         {"\n    "}
-        times<span className={tk.punct}>:</span> z
-        <span className={tk.punct}>.</span>
+        times<span className={tk.punct}>:</span> z<span className={tk.punct}>.</span>
         <span className={tk.func}>number</span>
         <span className={tk.punct}>().</span>
         <span className={tk.func}>default</span>
@@ -260,8 +251,7 @@ function SourceSample() {
         <span className={tk.punct}>(</span>z<span className={tk.punct}>.</span>
         <span className={tk.func}>object</span>
         <span className={tk.punct}>{"({ "}</span>
-        greeting<span className={tk.punct}>:</span> z
-        <span className={tk.punct}>.</span>
+        greeting<span className={tk.punct}>:</span> z<span className={tk.punct}>.</span>
         <span className={tk.func}>string</span>
         <span className={tk.punct}>{"() })) "}</span>
         {"\n  "}
@@ -294,8 +284,7 @@ function ManifestSample() {
   return (
     <pre className="p-5 text-sm leading-relaxed font-mono overflow-x-auto">
       <code className={tk.body}>
-        <span className={tk.prompt}>$</span>{" "}
-        <span className={tk.func}>greet</span>{" "}
+        <span className={tk.prompt}>$</span> <span className={tk.func}>greet</span>{" "}
         <span className={tk.flag}>--llms</span>
         {"\n"}
         <span className={tk.punct}>{"{"}</span>
@@ -305,16 +294,14 @@ function ManifestSample() {
         {"\n    "}
         <span className={tk.punct}>{"{ "}</span>
         <span className={tk.key}>"name"</span>
-        <span className={tk.punct}>:</span>{" "}
-        <span className={tk.string}>"help"</span>
+        <span className={tk.punct}>:</span> <span className={tk.string}>"help"</span>
         <span className={tk.punct}>,</span> <span className={tk.dim}>...</span>
         <span className={tk.punct}>{" }, "}</span>
         {"\n    "}
         <span className={tk.punct}>{"{"}</span>
         {"\n      "}
         <span className={tk.key}>"name"</span>
-        <span className={tk.punct}>:</span>{" "}
-        <span className={tk.string}>"greet"</span>
+        <span className={tk.punct}>:</span> <span className={tk.string}>"greet"</span>
         <span className={tk.punct}>,</span>
         {"\n      "}
         <span className={tk.key}>"description"</span>
@@ -323,21 +310,17 @@ function ManifestSample() {
         <span className={tk.punct}>,</span>
         {"\n      "}
         <span className={tk.key}>"inputSchema"</span>
-        <span className={tk.punct}>:</span>{" "}
-        <span className={tk.punct}>{"{ "}</span>
+        <span className={tk.punct}>:</span> <span className={tk.punct}>{"{ "}</span>
         <span className={tk.key}>"type"</span>
-        <span className={tk.punct}>:</span>{" "}
-        <span className={tk.string}>"object"</span>
+        <span className={tk.punct}>:</span> <span className={tk.string}>"object"</span>
         <span className={tk.punct}>,</span> <span className={tk.dim}>...</span>
         <span className={tk.punct}>{" }"}</span>
         <span className={tk.punct}>,</span>
         {"\n      "}
         <span className={tk.key}>"outputSchema"</span>
-        <span className={tk.punct}>:</span>{" "}
-        <span className={tk.punct}>{"{ "}</span>
+        <span className={tk.punct}>:</span> <span className={tk.punct}>{"{ "}</span>
         <span className={tk.key}>"type"</span>
-        <span className={tk.punct}>:</span>{" "}
-        <span className={tk.string}>"object"</span>
+        <span className={tk.punct}>:</span> <span className={tk.string}>"object"</span>
         <span className={tk.punct}>,</span> <span className={tk.dim}>...</span>
         <span className={tk.punct}>{" }"}</span>
         {"\n    "}
@@ -362,8 +345,7 @@ function Showcase() {
               One schema, every interface
             </h2>
             <p className="mt-4 text-muted-foreground text-lg">
-              The same zod schema drives{" "}
-              <code className="font-mono">--help</code>,{" "}
+              The same zod schema drives <code className="font-mono">--help</code>,{" "}
               <code className="font-mono">--json</code>, and the LLM manifest.
             </p>
           </div>
@@ -425,8 +407,8 @@ function FinalCta() {
             <span className="text-primary">Write a schema.</span>
           </h2>
           <p className="mt-6 text-lg text-muted-foreground">
-            Install, write a command, ship a CLI that humans, scripts, and LLMs
-            can all call.
+            Install, write a command, ship a CLI that humans, scripts, and LLMs can all
+            call.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link

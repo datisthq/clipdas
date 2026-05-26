@@ -93,19 +93,12 @@ describe("f.program", () => {
     expect(manifest.tools).toHaveLength(3)
     expect(manifest.tools[0].name).toBe("help")
     expect(manifest.tools[0].description).toContain("--json")
-    const greetTool = manifest.tools.find(
-      (t: { name: string }) => t.name === "greet",
-    )
-    const deployTool = manifest.tools.find(
-      (t: { name: string }) => t.name === "deploy",
-    )
+    const greetTool = manifest.tools.find((t: { name: string }) => t.name === "greet")
+    const deployTool = manifest.tools.find((t: { name: string }) => t.name === "deploy")
     expect(greetTool.description).toBe("Greets the user")
     expect(greetTool.inputSchema.properties.name).toBeDefined()
     expect(greetTool.outputSchema.properties.greeting).toBeDefined()
-    expect(deployTool.inputSchema.properties.env.enum).toEqual([
-      "staging",
-      "prod",
-    ])
+    expect(deployTool.inputSchema.properties.env.enum).toEqual(["staging", "prod"])
   })
 
   it("subcommand --llms still works after attachment", async () => {
@@ -198,9 +191,7 @@ describe("f.program", () => {
       .output(z.object({}))
       .handler(() => ({}))
 
-    const cli = f
-      .program({ name: "myapp", llmsOption: false })
-      .commands({ greet })
+    const cli = f.program({ name: "myapp", llmsOption: false }).commands({ greet })
 
     expect(cli.helpInformation()).not.toContain("--llms")
     expect(cli.commands[0]?.helpInformation()).toContain("--llms")

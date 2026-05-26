@@ -15,10 +15,7 @@ export function createCommand(config: CommandConfig = {}) {
   }
 }
 
-function createInputBuilder<I extends z.ZodObject>(
-  config: CommandConfig,
-  input: I,
-) {
+function createInputBuilder<I extends z.ZodObject>(config: CommandConfig, input: I) {
   return {
     output<O extends z.ZodObject>(schema: O) {
       return createOutputBuilder(config, input, schema)

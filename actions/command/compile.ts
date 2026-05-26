@@ -34,9 +34,7 @@ export function compileCommand<I extends z.ZodObject, O extends z.ZodObject>(
   applyConfig(cmd, config)
   const argKeys = declareFields(cmd, input)
   wireAction(cmd, argKeys, input, output, handler)
-  registerManifestBuilder(cmd, prefix => [
-    buildLeafTool(cmd, input, output, prefix),
-  ])
+  registerManifestBuilder(cmd, prefix => [buildLeafTool(cmd, input, output, prefix)])
   return cmd
 }
 
@@ -71,26 +69,18 @@ function applyConfig(cmd: CommanderCommand, config: CommandConfig) {
   if (config.preAction) cmd.hook("preAction", config.preAction)
   if (config.postAction) cmd.hook("postAction", config.postAction)
 
-  if (config.configureHelp !== undefined)
-    cmd.configureHelp(config.configureHelp)
+  if (config.configureHelp !== undefined) cmd.configureHelp(config.configureHelp)
 
   if (config.addHelpText !== undefined) {
-    const positions: AddHelpTextPosition[] = [
-      "beforeAll",
-      "before",
-      "after",
-      "afterAll",
-    ]
+    const positions: AddHelpTextPosition[] = ["beforeAll", "before", "after", "afterAll"]
     for (const position of positions) {
       const text = config.addHelpText[position]
       if (typeof text === "string") cmd.addHelpText(position, text)
       else if (text !== undefined) cmd.addHelpText(position, text)
     }
   }
-  if (config.addHelpCommand !== undefined)
-    cmd.addHelpCommand(config.addHelpCommand)
-  if (config.addHelpOption !== undefined)
-    cmd.addHelpOption(config.addHelpOption)
+  if (config.addHelpCommand !== undefined) cmd.addHelpCommand(config.addHelpCommand)
+  if (config.addHelpOption !== undefined) cmd.addHelpOption(config.addHelpOption)
   if (config.exitOverride === true) cmd.exitOverride()
   else if (typeof config.exitOverride === "function") {
     cmd.exitOverride(config.exitOverride)
@@ -98,8 +88,7 @@ function applyConfig(cmd: CommanderCommand, config: CommandConfig) {
   if (config.configureOutput !== undefined) {
     cmd.configureOutput(config.configureOutput)
   }
-  if (config.executableDir !== undefined)
-    cmd.executableDir(config.executableDir)
+  if (config.executableDir !== undefined) cmd.executableDir(config.executableDir)
   if (config.on !== undefined) {
     for (const { event, listener } of config.on) cmd.on(event, listener)
   }
@@ -132,12 +121,7 @@ function declareFields(cmd: CommanderCommand, input: z.ZodObject) {
     const schema = input.shape[key]
     if (schema === undefined) continue
     const meta = readFieldMeta(schema)
-    declareArgument(
-      cmd,
-      key,
-      schema,
-      meta?.kind === "argument" ? meta : undefined,
-    )
+    declareArgument(cmd, key, schema, meta?.kind === "argument" ? meta : undefined)
   }
 
   for (const [key, schema] of Object.entries(input.shape)) {
@@ -237,8 +221,7 @@ function wireAction<I extends z.ZodObject, O extends z.ZodObject>(
     const json = options.json
 
     if (options.llms === true) {
-      const writer =
-        cmd.configureOutput().writeOut ?? (s => process.stdout.write(s))
+      const writer = cmd.configureOutput().writeOut ?? (s => process.stdout.write(s))
       const tools = readManifestBuilder(cmd, "") ?? []
       const manifest = { tools: [buildHelpTool(), ...tools] }
       writer(`${JSON.stringify(manifest, null, 2)}\n`)
@@ -246,13 +229,11 @@ function wireAction<I extends z.ZodObject, O extends z.ZodObject>(
     }
 
     if (json !== undefined) {
-      const raw =
-        typeof json === "string" ? JSON.parse(json) : buildRawFromCli()
+      const raw = typeof json === "string" ? JSON.parse(json) : buildRawFromCli()
       const parsed = input.parse(raw)
       const result = await handler(parsed)
       const validated = output.parse(result)
-      const writer =
-        cmd.configureOutput().writeOut ?? (s => process.stdout.write(s))
+      const writer = cmd.configureOutput().writeOut ?? (s => process.stdout.write(s))
       writer(`${JSON.stringify(validated, null, 2)}\n`)
       return
     }

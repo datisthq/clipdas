@@ -134,9 +134,7 @@ describe("f.command", () => {
 
     await cmd.parseAsync(["--kind", "b"], { from: "user" })
     expect(captured).toEqual({ kind: "b" })
-    await expect(
-      cmd.parseAsync(["--kind", "z"], { from: "user" }),
-    ).rejects.toThrow()
+    await expect(cmd.parseAsync(["--kind", "z"], { from: "user" })).rejects.toThrow()
   })
 
   it("derives choices from z.enum on positionals built via f.argument", async () => {
@@ -250,9 +248,7 @@ describe("f.command", () => {
       .command({ name: "greet" })
       .input(
         z.object({
-          port: f
-            .option({ env: "FIREARGS_TEST_PORT" })
-            .schema(z.coerce.number()),
+          port: f.option({ env: "FIREARGS_TEST_PORT" }).schema(z.coerce.number()),
         }),
       )
       .output(z.object({ ok: z.boolean() }))
@@ -286,9 +282,7 @@ describe("f.command", () => {
       .output(z.object({ ok: z.boolean() }))
       .handler(() => ({ ok: true }))
 
-    await expect(
-      cmd.parseAsync(["--rgb", "--cmyk"], { from: "user" }),
-    ).rejects.toThrow()
+    await expect(cmd.parseAsync(["--rgb", "--cmyk"], { from: "user" })).rejects.toThrow()
   })
 
   it("f.option attaches hidden flag", () => {

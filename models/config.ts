@@ -90,10 +90,7 @@ export type CommandConfig = {
   configureHelp?: HelpConfiguration
   /** Extra help paragraphs by position. Forwarded to `cmd.addHelpText(...)`. */
   addHelpText?: Partial<
-    Record<
-      AddHelpTextPosition,
-      string | ((context: AddHelpTextContext) => string)
-    >
+    Record<AddHelpTextPosition, string | ((context: AddHelpTextContext) => string)>
   >
   /** Replace commander's auto-generated help subcommand with a pre-built one. */
   addHelpCommand?: CommanderCommand

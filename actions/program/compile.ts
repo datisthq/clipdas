@@ -29,10 +29,7 @@ export function compileProgram(
   return cmd
 }
 
-function collectTools(
-  commands: Record<string, CommanderCommand>,
-  prefix: string,
-) {
+function collectTools(commands: Record<string, CommanderCommand>, prefix: string) {
   const tools: Tool[] = []
   for (const [key, sub] of Object.entries(commands)) {
     const subPrefix = prefix ? `${prefix} ${key}` : key
@@ -59,8 +56,7 @@ function applyProgramConfig(cmd: CommanderCommand, config: ProgramConfig) {
 
   if (config.allowUnknownOption) cmd.allowUnknownOption(true)
   if (config.allowExcessArguments) cmd.allowExcessArguments(true)
-  if (config.enablePositionalOptions !== false)
-    cmd.enablePositionalOptions(true)
+  if (config.enablePositionalOptions !== false) cmd.enablePositionalOptions(true)
   if (config.passThroughOptions) cmd.passThroughOptions(true)
   if (config.combineFlagAndOptionalValue) cmd.combineFlagAndOptionalValue(true)
   if (config.showHelpAfterError !== undefined) {
@@ -74,8 +70,7 @@ function applyProgramConfig(cmd: CommanderCommand, config: ProgramConfig) {
   if (config.preAction) cmd.hook("preAction", config.preAction)
   if (config.postAction) cmd.hook("postAction", config.postAction)
 
-  if (config.configureHelp !== undefined)
-    cmd.configureHelp(config.configureHelp)
+  if (config.configureHelp !== undefined) cmd.configureHelp(config.configureHelp)
 
   if (config.addHelpText !== undefined) {
     const positions = ["beforeAll", "before", "after", "afterAll"] as const
@@ -85,10 +80,8 @@ function applyProgramConfig(cmd: CommanderCommand, config: ProgramConfig) {
       else if (text !== undefined) cmd.addHelpText(position, text)
     }
   }
-  if (config.addHelpCommand !== undefined)
-    cmd.addHelpCommand(config.addHelpCommand)
-  if (config.addHelpOption !== undefined)
-    cmd.addHelpOption(config.addHelpOption)
+  if (config.addHelpCommand !== undefined) cmd.addHelpCommand(config.addHelpCommand)
+  if (config.addHelpOption !== undefined) cmd.addHelpOption(config.addHelpOption)
   if (config.exitOverride === true) cmd.exitOverride()
   else if (typeof config.exitOverride === "function") {
     cmd.exitOverride(config.exitOverride)
@@ -96,8 +89,7 @@ function applyProgramConfig(cmd: CommanderCommand, config: ProgramConfig) {
   if (config.configureOutput !== undefined) {
     cmd.configureOutput(config.configureOutput)
   }
-  if (config.executableDir !== undefined)
-    cmd.executableDir(config.executableDir)
+  if (config.executableDir !== undefined) cmd.executableDir(config.executableDir)
   if (config.on !== undefined) {
     for (const { event, listener } of config.on) cmd.on(event, listener)
   }
@@ -117,8 +109,7 @@ function declareLlmsOnProgram(
 
   cmd.action((options: { llms?: boolean }) => {
     if (options.llms !== true) return
-    const writer =
-      cmd.configureOutput().writeOut ?? (s => process.stdout.write(s))
+    const writer = cmd.configureOutput().writeOut ?? (s => process.stdout.write(s))
     const manifest = {
       tools: [buildHelpTool(), ...collectTools(commands, "")],
     }
